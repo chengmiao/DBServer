@@ -3,7 +3,7 @@ project(dbserver)
 
 set (CMAKE_CXX_COMPILER /usr/local/bin/g++)
 #set (CMAKE_CXX_FLAGS --std=c++14)
-add_compile_options(-std=c++14)
+add_compile_options(-std=c++14 -ldl)
 
 include_directories(${CMAKE_SOURCE_DIR}/opt/lua ${CMAKE_SOURCE_DIR}/opt/sol2)
 
