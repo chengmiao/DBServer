@@ -1,7 +1,18 @@
 #include <iostream>
+#include "sol.hpp"
 
 int main(int argc, char const *argv[])
 {
-    std::cout<< "Hello World" << endl;
+    std::cout << "=== running lua code ===" << std::endl;
+    
+    sol::state lua;
+    lua.open_libraries(sol::lib::base);
+
+    int value = lua.script("return 54");
+    if (value == 54)
+    {
+        std::cout << "Hello World" << std::endl;
+    }
+
     return 0;
 }
