@@ -1,0 +1,3 @@
+[submodule "opt/sol2"]
+	path = opt/sol2
+	url = https://github.com/ThePhD/sol2.git
