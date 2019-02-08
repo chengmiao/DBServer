@@ -12,6 +12,7 @@ int main(int argc, char const *argv[])
     if (value == 54)
     {
         std::cout << "Hello World" << std::endl;
+        lua.script_file("PBtest.lua");
     }
 
     return 0;
