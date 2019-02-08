@@ -1,5 +1,5 @@
-package.path = ';/opt/lua-protobuf/?.lua'
-package.cpath = ';/lib/?.so'
+package.path = ';/root/dbserver/opt/lua-protobuf/?.lua'
+package.cpath = ';/root/dbserver/lib/?.so'
 
 local pb = require "libpb"
 local protoc = require "protoc"
