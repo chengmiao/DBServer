@@ -1,7 +1,7 @@
 package.path = ';/opt/lua-protobuf/?.lua'
 package.cpath = ';/lib/?.so'
 
-local pb = require "pb"
+local pb = require "libpb"
 local protoc = require "protoc"
 
 -- load schema from text
