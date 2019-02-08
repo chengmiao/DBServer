@@ -6,7 +6,7 @@ int main(int argc, char const *argv[])
     std::cout << "=== running lua code ===" << std::endl;
     
     sol::state lua;
-    lua.open_libraries(sol::lib::base, sol::lib::package);
+    lua.open_libraries(sol::lib::base, sol::lib::package, sol::lib::string);
 
     int value = lua.script("return 54");
     if (value == 54)
