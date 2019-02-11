@@ -1,17 +1,7 @@
 #include <iostream>
 #include "sol.hpp"
-//#include "asio.hpp"
+#include "asio.hpp"
 
-class Test : public std::enable_shared_from_this<Test>
-{
-public:
-    Test()
-    {
-        std::cout << "Hello" << std::endl;
-    }
-};
-
-/*
 using asio::ip::tcp;
 
 class Session : public std::enable_shared_from_this<Session>
@@ -95,12 +85,10 @@ private:
 
 tcp::acceptor acceptor_;
 };
-*/
 
 
 int main(int argc, char const *argv[])
 {
-/*
     try
     {
         if (argc != 2)
@@ -119,8 +107,6 @@ int main(int argc, char const *argv[])
     {
         std::cerr << "Exception: " << e.what() << "\n";
     }
-*/
-    Test t;
 
     return 0;
 }
