@@ -7,12 +7,12 @@ void Session(asio::ip::tcp::socket socket)
 {
     try 
     {
-        white (true)
+        while (true)
         {
             std::array<char, 1024> data;
 
             asio::system_error ec;
-            std::size_t length = socket.read_some(asio::buffered_read_stream(data), ec);
+            std::size_t length = socket.read_some(asio::buffered_read_stream<data>, ec);
 
             if (ec == asio::error::eof)
             {
@@ -38,11 +38,11 @@ void Session(asio::ip::tcp::socket socket)
             }
         }
 
-        asio::write(socket, asio::buffered_write_stream(data, length));
+        asio::write(socket, asio::buffered_write_stream<data, length>);
     }
     catch (const std::exception& e)
     {
-        std::cerr << "Exception: " e.what() << std::endl;
+        std::cerr << "Exception: " << e.what() << std::endl;
     }
 
 
@@ -59,7 +59,7 @@ int main(int argc, char const *argv[])
     unsigned short port = std::atoi(argv[1]);
 
     asio::io_context ioc;
-    asio::ip::tcp::acceptor acceptor(ioc, tcp::endpoint(asio::ip::tcp::v4(), port));
+    asio::ip::tcp::acceptor acceptor(ioc, asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port));
 
     try
     {
