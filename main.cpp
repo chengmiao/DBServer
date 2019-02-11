@@ -4,6 +4,7 @@
 
 class Test : public std::enable_shared_from_this<Test>
 {
+public:
     Test()
     {
         std::cout << "Hello" << std::endl;
