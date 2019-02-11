@@ -7,7 +7,7 @@ set (CMAKE_C_FLAGS "-fPIC")
 #add_compile_options(-std=c++14)
 #add_compile_options(-ldl)
 
-include_directories(${CMAKE_SOURCE_DIR}/opt/lua ${CMAKE_SOURCE_DIR}/opt/sol2 ${CMAKE_SOURCE_DIR}/opt/lua-protobuf ${CMAKE_SOURCE_DIR}/opt/asio)
+include_directories(${CMAKE_SOURCE_DIR}/opt/lua ${CMAKE_SOURCE_DIR}/opt/sol2 ${CMAKE_SOURCE_DIR}/opt/lua-protobuf ${CMAKE_SOURCE_DIR}/opt/asio/asio/include)
 
 link_directories(${CMAKE_SOURCE_DIR}/lib)
 
