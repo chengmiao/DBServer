@@ -3,7 +3,7 @@
 #include "asio.hpp"
 
 
-using asio::ip::tcp
+using asio::ip::tcp;
 
 class Session : public std::enable_shared_from_this<Session>
 {
@@ -49,7 +49,7 @@ private:
                     std::cout << "Hello World" << std::endl;
                     lua.script_file("PBtest.lua");
                 }
-                
+
                 do_read();
             }
         });
@@ -64,7 +64,7 @@ char data_[max_length];
 class Server
 {
 public:
-    Server() : acceptor(io_context, tcp::endpoint(tcp::v4(), port))
+    Server(asio::io_context& io_context, short port) : acceptor_(io_context, tcp::endpoint(tcp::v4(), port))
     {
         do_accept();
     }
@@ -77,7 +77,7 @@ private:
         {
             if (!ec)
             {
-                std::make_shared<Session>(std::move(socket))->start();
+                std::make_shared<Session>(std::move(socket))->Start();
             }
 
             do_accept();
