@@ -19,7 +19,7 @@ public:
 private:
     void do_read()
     {
-        auto self(shared_from_this);
+        auto self(shared_from_this());
         socket_.async_read_some(asio::buffer(data_, max_length),
         [this, self](std::error_code ec, std::size_t length)
         {
@@ -100,7 +100,7 @@ int main(int argc, char const *argv[])
 
         asio::io_context io_context;
 
-        server s(io_context, std::atoi(argv[1]));
+        Server s(io_context, std::atoi(argv[1]));
 
         io_context.run();
     }
