@@ -11,9 +11,9 @@ void Session(asio::ip::tcp::socket socket)
         {
             std::array<char, 1024> data;
 
-            asio::system_error ec;
-            std::size_t length = socket.read_some(asio::buffered_read_stream<data>, ec);
-
+            asio::error_code ec;
+            std::size_t length = socket.read_some(asio::buffer(data), ec);
+        
             if (ec == asio::error::eof)
             {
                 std::cout << "连接被clinet妥善的关闭了" << std::endl;
@@ -38,7 +38,7 @@ void Session(asio::ip::tcp::socket socket)
             }
         }
 
-        asio::write(socket, asio::buffered_write_stream<data, length>);
+        asio::write(socket, asio::buffer(data, length);
     }
     catch (const std::exception& e)
     {
@@ -65,7 +65,7 @@ int main(int argc, char const *argv[])
     {
         while(true)
         {
-            Session(accept.accept());
+            Session(acceptor.accept());
         }
     }
     catch (const std::exception& e)
