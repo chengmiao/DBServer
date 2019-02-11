@@ -13,23 +13,22 @@ void Session(asio::ip::tcp::socket socket)
 
             asio::error_code ec;
             std::size_t length = socket.read_some(asio::buffer(data), ec);
-        
+
+            std::cout << "=== running lua code ===" << std::endl;
+    
+            sol::state lua;
+            lua.open_libraries();
+
+            int value = lua.script("return 54");
+            if (value == 54)
+            {
+                std::cout << "Hello World" << std::endl;
+                lua.script_file("PBtest.lua");
+            }
+
             if (ec == asio::error::eof)
             {
                 std::cout << "连接被clinet妥善的关闭了" << std::endl;
-
-                std::cout << "=== running lua code ===" << std::endl;
-    
-                sol::state lua;
-                lua.open_libraries();
-
-                int value = lua.script("return 54");
-                if (value == 54)
-                {
-                     std::cout << "Hello World" << std::endl;
-                     lua.script_file("PBtest.lua");
-                }
-
                 break;
             }
             else if (ec)
