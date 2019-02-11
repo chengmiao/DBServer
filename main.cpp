@@ -4,7 +4,10 @@
 
 class Test : public std::enable_shared_from_this<Test>
 {
-
+    Test()
+    {
+        std::cout << "Hello" << std::endl;
+    }
 };
 
 /*
@@ -116,6 +119,7 @@ int main(int argc, char const *argv[])
         std::cerr << "Exception: " << e.what() << "\n";
     }
 */
-    std::cout << "Hello" << std::endl;
+    Test t;
+
     return 0;
 }
