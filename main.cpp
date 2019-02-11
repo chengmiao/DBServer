@@ -36,9 +36,9 @@ void Session(asio::ip::tcp::socket socket)
             {
                 throw asio::system_error(ec);
             }
-        }
 
-        asio::write(socket, asio::buffer(data, length);
+             asio::write(socket, asio::buffer(data, length);
+        }
     }
     catch (const std::exception& e)
     {
