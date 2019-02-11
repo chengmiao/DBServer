@@ -3,73 +3,110 @@
 #include "asio.hpp"
 
 
-void Session(asio::ip::tcp::socket socket)
+using asio::ip::tcp
+
+class Session : public std::enable_shared_from_this<Session>
 {
-    try 
+public:
+    Session(tcp::socket socket) : socket_(std::move(socket))
+    {}
+
+    void Start()
     {
-        while (true)
+        do_read();
+    }
+
+private:
+    void do_read()
+    {
+        auto self(shared_from_this);
+        socket_.async_read_some(asio::buffer(data_, max_length),
+        [this, self](std::error_code ec, std::size_t length)
         {
-            std::array<char, 1024> data;
-
-            asio::error_code ec;
-            std::size_t length = socket.read_some(asio::buffer(data), ec);
-
-            std::cout << "=== running lua code ===" << std::endl;
-    
-            sol::state lua;
-            lua.open_libraries();
-
-            int value = lua.script("return 54");
-            if (value == 54)
+            if (!ec)
             {
-                std::cout << "Hello World" << std::endl;
-                lua.script_file("PBtest.lua");
+                do_write(length);
             }
-
-            if (ec == asio::error::eof)
-            {
-                std::cout << "连接被clinet妥善的关闭了" << std::endl;
-                break;
-            }
-            else if (ec)
-            {
-                throw asio::system_error(ec);
-            }
-
-             asio::write(socket, asio::buffer(data, length));
-        }
+        });
     }
-    catch (const std::exception& e)
+
+    void do_write(std::size_t length)
     {
-        std::cerr << "Exception: " << e.what() << std::endl;
+        auto self(shared_from_this());
+        asio::async_write(socket_, asio::buffer(data_, length),
+        [this, self](std::error_code ec, std::size_t)
+        {
+            if (!ec)
+            {
+                std::cout << "=== running lua code ===" << std::endl;
+    
+                sol::state lua;
+                lua.open_libraries();
+
+                int value = lua.script("return 54");
+                if (value == 54)
+                {
+                    std::cout << "Hello World" << std::endl;
+                    lua.script_file("PBtest.lua");
+                }
+                
+                do_read();
+            }
+        });
     }
 
+tcp::socket socket_;
+enum { max_length = 1024 };
+char data_[max_length];
+};
 
-}
+
+class Server
+{
+public:
+    Server() : acceptor(io_context, tcp::endpoint(tcp::v4(), port))
+    {
+        do_accept();
+    }
+
+private:
+    void do_accept()
+    {
+        acceptor_.async_accept(
+        [this](std::error_code ec, tcp::socket socket)
+        {
+            if (!ec)
+            {
+                std::make_shared<Session>(std::move(socket))->start();
+            }
+
+            do_accept();
+        });
+    }
+
+tcp::acceptor acceptor_;
+};
+
 
 int main(int argc, char const *argv[])
 {
-    if (argc != 2)
-    {
-        std::cerr << "Usage: " << argv[0] << " <port>" << std::endl;
-        return 1; 
-    }
-
-    unsigned short port = std::atoi(argv[1]);
-
-    asio::io_context ioc;
-    asio::ip::tcp::acceptor acceptor(ioc, asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port));
-
     try
     {
-        while(true)
+        if (argc != 2)
         {
-            Session(acceptor.accept());
+            std::cerr << "Usage: " << argv[0] << " <port>" << std::endl;
+            return 1; 
         }
+
+        asio::io_context io_context;
+
+        server s(io_context, std::atoi(argv[1]));
+
+        io_context.run();
     }
-    catch (const std::exception& e)
+    catch (std::exception& e)
     {
-        std::cerr << "Exception " << e.what() << std::endl;
+        std::cerr << "Exception: " << e.what() << "\n";
     }
 
     return 0;
