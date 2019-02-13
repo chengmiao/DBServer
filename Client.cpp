@@ -31,10 +31,10 @@ int main(int argc, char* argv[])
         msg.set_name("ChengMiao");
         msg.set_age(30);
         msg.set_address("ShangHai");
-        test::Phone* pMsg2 = msg.mutable_contacts(1);
+        test::Phone* pMsg2 = msg.mutable_contacts(4);
         pMsg2->set_name("Linda");
         pMsg2->set_phonenumber(18550101351);
-        pMsg2 = msg.mutable_contacts(2);
+        pMsg2 = msg.mutable_contacts(5);
         pMsg2->set_name("Jacky");
         pMsg2->set_phonenumber(15995872674);
 
