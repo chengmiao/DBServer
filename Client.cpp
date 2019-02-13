@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
     {
         if (argc != 3)
         {
-            std::cerr << "Usage: <host> <port>\n"
+            std::cerr << "Usage: <host> <port>\n";
             return 1;
         }
 
