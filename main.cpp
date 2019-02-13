@@ -46,6 +46,8 @@ private:
                 if (value == 54)
                 {
                     std::cout << "Hello World" << std::endl;
+
+                    lua["testdata"] = data_;
                     lua.script_file("PBtest.lua");
                 }
 

@@ -27,6 +27,8 @@ local data = {
    }
 }
 
+print(testdata);
+
 -- encode lua table data into binary format in lua string and return
 local bytes = assert(pb.encode("Person", data))
 print(pb.tohex(bytes))
