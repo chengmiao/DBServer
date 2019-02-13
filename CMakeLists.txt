@@ -18,8 +18,13 @@ link_directories(${CMAKE_SOURCE_DIR}/lib ${CMAKE_SOURCE_DIR}/opt/protobuf_linux/
 add_executable(main main.cpp)
 target_link_libraries(main liblua.a)
 
+#add_subdirectory(${CMAKE_SOURCE_DIR}/proto)
 
-add_subdirectory(${CMAKE_SOURCE_DIR}/proto)
+file(GLOB PROTO_SRCS ${CMAKE_SOURCE_DIR}/proto/src/*.cc)	
+file(GLOB PROTO_HDRS ${CMAKE_SOURCE_DIR}/proto/src/*.h)
+	
+add_library(proto STATIC ${PROTO_SRCS} ${PROTO_HDRS})
+SET_TARGET_PROPERTIES (proto PROPERTIES OUTPUT_NAME "proto")
 
 #add_executable(client Client.cpp)
 #target_link_libraries(client proto protobuf)
