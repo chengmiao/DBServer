@@ -47,7 +47,7 @@ private:
                 {
                     std::cout << "Hello World" << std::endl;
 
-                    lua["testdata"] = "1235677";
+                    lua["testdata"] = data_;
                     lua.script_file("PBtest.lua");
                 }
 
