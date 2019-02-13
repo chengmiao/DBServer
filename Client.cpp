@@ -31,12 +31,9 @@ int main(int argc, char* argv[])
         msg.set_name("ChengMiao");
         msg.set_age(30);
         msg.set_address("ShangHai");
-        test::Phone* pMsg2 = msg.mutable_contacts();
-        pMsg2->set_name("Linda");
-        pMsg2->set_phonenumber(18550101351);
-        pMsg2 = msg.mutable_contacts();
-        pMsg2->set_name("Jacky");
-        pMsg2->set_phonenumber(15995872674);
+        test::Phone msg1 = msg.add_contacts();
+        msg1.set_name("Linda");
+        msg1.set_phonenumber(18550101361);
 
         msg.SerializeToArray(request, msg.ByteSize());
         asio::write(s, asio::buffer(request, msg.ByteSize()));
