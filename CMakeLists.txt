@@ -11,10 +11,13 @@ add_definitions(-DASIO_STANDALONE)
 
 include_directories(${CMAKE_SOURCE_DIR}/opt/lua ${CMAKE_SOURCE_DIR}/opt/sol2 ${CMAKE_SOURCE_DIR}/opt/lua-protobuf ${CMAKE_SOURCE_DIR}/opt/asio/asio/include)
 
-link_directories(${CMAKE_SOURCE_DIR}/lib)
+link_directories(${CMAKE_SOURCE_DIR}/lib ${CMAKE_SOURCE_DIR}/opt/protobuf_linux/lib ${CMAKE_SOURCE_DIR}/proto)
 
 #add_library(pb SHARED ${CMAKE_SOURCE_DIR}/opt/lua-protobuf/pb.c)
 add_executable(main main.cpp)
 target_link_libraries(main liblua.a)
 
+
+add_subdirectory(${CMAKE_SURCE_DIR}/proto)
 add_executable(client Client.cpp)
+target_link_libraries(client proto protobuf)
