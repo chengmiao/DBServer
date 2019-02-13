@@ -31,9 +31,9 @@ int main(int argc, char* argv[])
         msg.set_name("ChengMiao");
         msg.set_age(30);
         msg.set_address("ShangHai");
-        test::Phone msg1 = msg.add_contacts();
-        msg1.set_name("Linda");
-        msg1.set_phonenumber(18550101361);
+        test::Phone* msg1 = msg.add_contacts();
+        msg1->set_name("Linda");
+        msg1->set_phonenumber(18550101361);
 
         msg.SerializeToArray(request, msg.ByteSize());
         asio::write(s, asio::buffer(request, msg.ByteSize()));
