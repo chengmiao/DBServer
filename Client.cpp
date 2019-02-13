@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
         asio::write(s, asio::buffer(request, msg.ByteSize()));
 
         char reply[max_length];
-        std::size_t reply_length = asio::read(s, asio::buffer(reply, request_length));
+        std::size_t reply_length = asio::read(s, asio::buffer(reply, msg.ByteSize()));
         std::cout << "Reply is";
         std::cout.write(reply, reply_length);
         std::cout << "\n";
