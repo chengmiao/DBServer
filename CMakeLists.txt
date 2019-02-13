@@ -26,5 +26,5 @@ file(GLOB PROTO_HDRS ${CMAKE_SOURCE_DIR}/proto/src/*.h)
 add_library(proto STATIC ${PROTO_SRCS} ${PROTO_HDRS})
 SET_TARGET_PROPERTIES (proto PROPERTIES OUTPUT_NAME "proto")
 
-#add_executable(client Client.cpp)
-#target_link_libraries(client proto protobuf)
+add_executable(client Client.cpp)
+target_link_libraries(client proto protobuf)
