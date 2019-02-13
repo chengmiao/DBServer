@@ -1,3 +1,4 @@
+#include <iostream>
 #include "asio.hpp"
 
 using asio::ip::tcp;
@@ -17,7 +18,7 @@ int main(int argc, char* argv[])
 
         tcp::socket s(io_context);
         tcp::resolver resolver(io_context);
-        asio::connect(s, resolve.resolve(argv[1], argv[2]));
+        asio::connect(s, resolver.resolve(argv[1], argv[2]));
 
         std::cout << "Enter message";
         char request[max_length];
