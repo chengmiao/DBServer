@@ -19,6 +19,7 @@ add_executable(main main.cpp)
 target_link_libraries(main liblua.a)
 
 
+add_subdirectory(${CMAKE_SOURCE_DIR}/proto)
+
 add_executable(client Client.cpp)
 target_link_libraries(client proto protobuf)
-add_subdirectory(${CMAKE_SOURCE_DIR}/proto)
