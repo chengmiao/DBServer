@@ -1,6 +1,8 @@
 #include <iostream>
 #include "asio.hpp"
 
+#include "test.pb.h"
+
 using asio::ip::tcp;
 enum { max_length = 1024 };
 
