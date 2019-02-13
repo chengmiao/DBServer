@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 project(dbserver)
 
 set (CMAKE_CXX_COMPILER /usr/local/bin/g++)
+set (CMAKE_C_COMPILER /usr/bin/gcc)
 set (CMAKE_CXX_FLAGS "-std=c++14 -ldl -lpthread")
 set (CMAKE_C_FLAGS "-fPIC")
 #add_compile_options(-std=c++14)
