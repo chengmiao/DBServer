@@ -29,6 +29,7 @@ function MakeMessageTable(field_type, main_table)
             if type == "int32" then
                 --table.insert(main_table, field_name, 1024)
                 print(field_type)
+                print(field_name)
                 main_table[field_name] = 1024
             elseif type == "string" then
                 --table.insert(main_table, field_name, "ChengMiao")
