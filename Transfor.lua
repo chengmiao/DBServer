@@ -17,7 +17,8 @@ protoc:loadfile(filename)
 local message_name = string.sub(filename, 1, -7)
 
 for name in pb.types() do
-    table.insert(type_table, name, name)
+    --table.insert(type_table, name, name)
+    type_table[name] = name
 end 
 
 for name, type_name in pb.types() do
@@ -31,13 +32,16 @@ function MakeMessageTable(field_type, main_table)
     for field_name, _, type in pb.fields(field_type) do
         if type_table[type] == nil then
             if type == "int32" then
-                table.insert(main_table, field_name, 1024)
+                --table.insert(main_table, field_name, 1024)
+                main_table[field_name] = 1024
             elseif type == "string" then
-                table.insert(main_table, field_name, "ChengMiao")
+                --table.insert(main_table, field_name, "ChengMiao")
+                main_table[field_name] = "ChengMiao"
             end
         else
             local tmp = MakeMessageTable(type, message_table)
-            table.insert(main_table, field_name, tmp)
+            --table.insert(main_table, field_name, tmp)
+            main_table[field_name] = tmp
         end
     end
 
