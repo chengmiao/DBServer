@@ -10,7 +10,7 @@ local p = protoc.new()
 local data = {}
 local type_table = {}
 
-p.paths[#p.paths + 1] = "/root/dbserver/proto"
+protoc.paths[#protoc.paths + 1] = "/root/dbserver/proto"
 --p.loadfile(filename)
 protoc:loadfile(filename)
 
