@@ -11,7 +11,8 @@ local data = {}
 local type_table = {}
 
 p.paths[#p.paths + 1] = "/root/dbserver/proto"
-p.loadfile(filename)
+--p.loadfile(filename)
+p.load[filename]()
 
 local message_name = string.sub(filename, 1, -7)
 
