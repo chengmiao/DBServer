@@ -37,7 +37,9 @@ function MakeMessageTable(field_type, main_table)
             end
         else
             --table.insert(main_table, field_name, tmp)
-            main_table[field_name] = MakeMessageTable(type, tmp)
+            local tmp_table = MakeMessageTable(type, tmp)
+            print(require "serpent".block(tmp_table))
+            --main_table[field_name] = MakeMessageTable(type, tmp)
         end
     end
 
