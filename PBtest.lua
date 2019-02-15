@@ -29,16 +29,16 @@ local data = {
    }
 }
 
---for name in pb.types() do
-  --print(name)
---end
+for name in pb.fields(".Person") do
+  print(name)
+end
 
-print(pb.type(".Person"))
+--print(pb.type(".Person"))
 
 -- encode lua table data into binary format in lua string and return
 --local bytes = assert(pb.encode("Person", data))
-print(pb.tohex(testdata))
+--print(pb.tohex(testdata))
 
 -- and decode the binary data back into lua table
-local data2 = assert(pb.decode("Person", testdata))
-print(require "serpent".block(data2))
+--local data2 = assert(pb.decode("Person", testdata))
+--print(require "serpent".block(data2))
