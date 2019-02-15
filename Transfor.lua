@@ -9,6 +9,7 @@ local p = protoc.new()
 
 local data = {}
 local type_table = {}
+local tmp = {}
 
 protoc.paths[#protoc.paths + 1] = "/root/dbserver/proto"
 --p.loadfile(filename)
@@ -23,7 +24,6 @@ for name in pb.types() do
 end 
 
 function MakeMessageTable(field_type, main_table) 
-    local message_table = {}
     for field_name, _, type in pb.fields(field_type) do
         if type_table[type] == nil then
             if type == "int32" then
@@ -34,7 +34,7 @@ function MakeMessageTable(field_type, main_table)
                 main_table[field_name] = "ChengMiao"
             end
         else
-            local tmp = MakeMessageTable(type, message_table)
+            tmp = MakeMessageTable(type, tmp)
             --table.insert(main_table, field_name, tmp)
             main_table[field_name] = tmp
         end
