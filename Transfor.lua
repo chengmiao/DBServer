@@ -37,9 +37,7 @@ function MakeMessageTable(field_type, main_table)
             end
         else
             --table.insert(main_table, field_name, tmp)
-            local tmp_table = MakeMessageTable(type, tmp)
-            print(require "serpent".block(tmp_table))
-            --main_table[field_name] = MakeMessageTable(type, tmp)
+            main_table[field_name] = MakeMessageTable(type, tmp)
         end
     end
 
@@ -61,5 +59,6 @@ print(pb.tohex(bytes))
 local data2 = assert(pb.decode(g_type_name, bytes))
 print(require "serpent".block(data2))
 print(require "serpent".block(tmp))
+print(require "serpent".block(data))
 
 
