@@ -105,7 +105,7 @@ int main(int argc, char* argv[])
 
         io_context.run();
 
-        std::cout << "============== Use Lua Start ================="
+        std::cout << "============== Use Lua Start =================" << std::endl;
         sol::state lua;
         lua.open_libraries();
         lua.script_file("PBtest.lua");
