@@ -93,22 +93,24 @@ int main(int argc, char* argv[])
 {
     try
     {
-        std::cout << "============== Use Lua Start =================" << std::endl;
-        sol::state lua;
-        lua.open_libraries();
-        lua.script_file("PBtest.lua");
-
         if (argc != 2)
         {
             std::cerr << "Usage: " << argv[0] << " <port>" << std::endl;
             return 1; 
         }
 
-        asio::io_context io_context;
+        std::cout << "============== Use Lua Start =================" << std::endl;
+        sol::state lua;
+        lua.open_libraries();
 
-        Server s(io_context, std::atoi(argv[1]));
+        lua["filename"] = std::atoi(argv[1]);
+        lua.script_file("Transfor.lua");
 
-        io_context.run();
+        //asio::io_context io_context;
+
+        //Server s(io_context, std::atoi(argv[1]));
+
+        //io_context.run();
     }
     catch (std::exception& e)
     {
