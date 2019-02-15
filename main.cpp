@@ -93,6 +93,11 @@ int main(int argc, char* argv[])
 {
     try
     {
+        std::cout << "============== Use Lua Start =================" << std::endl;
+        sol::state lua;
+        lua.open_libraries();
+        lua.script_file("PBtest.lua");
+
         if (argc != 2)
         {
             std::cerr << "Usage: " << argv[0] << " <port>" << std::endl;
@@ -104,12 +109,6 @@ int main(int argc, char* argv[])
         Server s(io_context, std::atoi(argv[1]));
 
         io_context.run();
-
-        std::cout << "============== Use Lua Start =================" << std::endl;
-        sol::state lua;
-        lua.open_libraries();
-        lua.script_file("PBtest.lua");
-
     }
     catch (std::exception& e)
     {
