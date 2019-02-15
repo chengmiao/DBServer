@@ -34,7 +34,7 @@ function MakeMessageTable(field_type, main_table)
             else if type == "string" then
                 table.insert(main_table, field_name, "ChengMiao")
             end
-        else
+        else if type_table[type] ~= nil then
             local tmp = MakeMessageTable(type, message_table)
             table.insert(main_table, field_name, tmp)
         end
