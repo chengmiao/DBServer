@@ -36,7 +36,6 @@ function MakeMessageTable(field_type, main_table)
             end
         else
             --table.insert(main_table, field_name, tmp)
-            print(type)
             main_table[field_name] = MakeMessageTable(type, tmp)
         end
     end
