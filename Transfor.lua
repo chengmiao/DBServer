@@ -13,7 +13,7 @@ local type_table = {}
 p.paths[#p.paths + 1] = "/root/dbserver/proto"
 p.loadfile(filename)
 
-local message_name = string.sub(filename, 1, -5)
+local message_name = string.sub(filename, 1, -7)
 
 for name in pb.types() do
     table.insert(type_table, name, name)
@@ -34,7 +34,7 @@ function MakeMessageTable(field_type, main_table)
             elseif type == "string" then
                 table.insert(main_table, field_name, "ChengMiao")
             end
-        else type_table[type] ~= nil then
+        else
             local tmp = MakeMessageTable(type, message_table)
             table.insert(main_table, field_name, tmp)
         end
