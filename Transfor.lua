@@ -34,9 +34,8 @@ function MakeMessageTable(field_type, main_table)
                 main_table[field_name] = "ChengMiao"
             end
         else
-            tmp = MakeMessageTable(type, tmp)
             --table.insert(main_table, field_name, tmp)
-            main_table[field_name] = tmp
+            main_table[field_name] = MakeMessageTable(type, tmp)
         end
     end
 
