@@ -21,23 +21,26 @@ end
 
 for name, type_name in pb.types() do
     if type_name == message_name then
-        MakeMessageTable(name)
+        MakeMessageTable(name, data)
     end
 end
 
-function MakeMessageTable(field_type) 
+function MakeMessageTable(field_type, main_table) 
+    local message_table = {}
     for field_name, _, type in pb.fields(field_type) do
-        if tmp[type] == nil then
+        if type_table[type] == nil then
             if type == "int32" then
-                table.insert(data, field_name, 1024)
+                table.insert(main_table, field_name, 1024)
             else if type == "string" then
-                table.insert(data, field_name, "ChengMiao")
+                table.insert(main_table, field_name, "ChengMiao")
             end
         else
-            local message_table = MakeMessageTable(type)
-            table.insert(data, field_name, message_table)
+            local tmp = MakeMessageTable(type, message_table)
+            table.insert(main_table, field_name, tmp)
         end
     end
+
+    return main_table
 end 
 
 -- encode lua table data into binary format in lua string and return

@@ -1,5 +1,5 @@
 syntax = "proto3";
-package test;
+package ChengMiao;
 
 message Phone
  {
@@ -7,7 +7,7 @@ message Phone
     int64  phonenumber = 2;
  }
 
- message Person 
+ message test 
  {
     string name     = 1;
     int32  age      = 2;
