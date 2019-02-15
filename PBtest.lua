@@ -29,6 +29,10 @@ local data = {
    }
 }
 
+for name in pb.types() do
+  print(name)
+end
+
 -- encode lua table data into binary format in lua string and return
 --local bytes = assert(pb.encode("Person", data))
 print(pb.tohex(testdata))

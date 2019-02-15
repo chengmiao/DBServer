@@ -104,6 +104,12 @@ int main(int argc, char* argv[])
         Server s(io_context, std::atoi(argv[1]));
 
         io_context.run();
+
+        std::cout << "============== Use Lua Start ================="
+        sol::state lua;
+        lua.open_libraries();
+        lua.script_file("PBtest.lua");
+
     }
     catch (std::exception& e)
     {
