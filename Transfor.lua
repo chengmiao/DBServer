@@ -15,6 +15,7 @@ protoc.paths[#protoc.paths + 1] = "/root/dbserver/proto"
 protoc:loadfile(filename)
 
 local message_name = string.sub(filename, 1, -7)
+local g_type_name
 
 for name in pb.types() do
     --table.insert(type_table, name, name)
@@ -44,16 +45,17 @@ end
 
 for name, type_name in pb.types() do
     if type_name == message_name then
+        g_type_name = name
         MakeMessageTable(name, data)
     end
 end
 
 -- encode lua table data into binary format in lua string and return
-local bytes = assert(pb.encode("Person", data))
+local bytes = assert(pb.encode(g_type_name, data))
 print(pb.tohex(bytes))
 
 -- and decode the binary data back into lua table
-local data2 = assert(pb.decode("Person", bytes))
+local data2 = assert(pb.decode(g_type_name, bytes))
 print(require "serpent".block(data2))
 
 
