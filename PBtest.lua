@@ -31,6 +31,8 @@ local data = {
 
 for name in pb.fields(".Person") do
   print(name)
+  print(pb.field(".Person", name))
+  print(pb.type(name))
 end
 
 --print(pb.type(".Person"))
