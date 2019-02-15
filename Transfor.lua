@@ -25,10 +25,10 @@ end
 
 function MakeMessageTable(field_type, main_table) 
     for field_name, _, type in pb.fields(field_type) do
-        print(field_type)
         if type_table[type] == nil then
             if type == "int32" then
                 --table.insert(main_table, field_name, 1024)
+                print(field_type)
                 main_table[field_name] = 1024
             elseif type == "string" then
                 --table.insert(main_table, field_name, "ChengMiao")
