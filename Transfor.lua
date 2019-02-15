@@ -21,12 +21,6 @@ for name in pb.types() do
     type_table[name] = name
 end 
 
-for name, type_name in pb.types() do
-    if type_name == message_name then
-        MakeMessageTable(name, data)
-    end
-end
-
 function MakeMessageTable(field_type, main_table) 
     local message_table = {}
     for field_name, _, type in pb.fields(field_type) do
@@ -47,6 +41,12 @@ function MakeMessageTable(field_type, main_table)
 
     return main_table
 end 
+
+for name, type_name in pb.types() do
+    if type_name == message_name then
+        MakeMessageTable(name, data)
+    end
+end
 
 -- encode lua table data into binary format in lua string and return
 local bytes = assert(pb.encode("Person", data))
