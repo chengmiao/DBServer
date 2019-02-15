@@ -31,10 +31,10 @@ function MakeMessageTable(field_type, main_table)
         if type_table[type] == nil then
             if type == "int32" then
                 table.insert(main_table, field_name, 1024)
-            else if type == "string" then
+            elseif type == "string" then
                 table.insert(main_table, field_name, "ChengMiao")
             end
-        else if type_table[type] ~= nil then
+        else type_table[type] ~= nil then
             local tmp = MakeMessageTable(type, message_table)
             table.insert(main_table, field_name, tmp)
         end
