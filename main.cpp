@@ -103,7 +103,7 @@ int main(int argc, char* argv[])
         sol::state lua;
         lua.open_libraries();
 
-        lua["filename"] = std::atoi(argv[1]);
+        lua["filename"] = argv[1];
         lua.script_file("Transfor.lua");
 
         //asio::io_context io_context;
