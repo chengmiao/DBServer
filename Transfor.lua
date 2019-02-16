@@ -5,15 +5,33 @@ package.cpath = ';/root/dbserver/lib/?.so'
 local pb = require "pb"
 local protoc = require "protoc"
 
-local p = protoc.new()
-
 local data = {}
 local type_table = {}
 local tmp = {}
 
 protoc.paths[#protoc.paths + 1] = "/root/dbserver/proto"
---p.loadfile(filename)
 protoc:loadfile(filename)
+
+local TestData = {
+    person = {
+        {
+            name = "Alice",
+            id = 12345,
+            phone = {
+                { number = "1301234567" },
+                { number = "87654321", type = "WORK" },
+            }
+        },
+        {
+            name = "Alice",
+            id = 12345,
+            phone = {
+                { number = "1301234567" },
+                { number = "87654321", type = "WORK" },
+            }
+        }
+    }
+}
 
 local message_name = string.sub(filename, 1, -7)
 local g_type_name
@@ -46,17 +64,17 @@ end
 for name, type_name in pb.types() do
     if type_name == message_name then
         g_type_name = name
-        MakeMessageTable(name, data)
+        --MakeMessageTable(name, data)
     end
 end
 
 -- encode lua table data into binary format in lua string and return
-local bytes = assert(pb.encode(g_type_name, data))
---print(pb.tohex(bytes))
+local bytes = assert(pb.encode("AddressBook", TestData))
+print(pb.tohex(bytes))
 
 -- and decode the binary data back into lua table
-local data2 = assert(pb.decode(g_type_name, bytes))
---print(require "serpent".block(data2))
-print(require "serpent".block(type_table))
+local data2 = assert(pb.decode("AddressBook", bytes))
+print(require "serpent".block(data2))
+--print(require "serpent".block(type_table))
 
 
