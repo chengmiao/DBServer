@@ -93,7 +93,7 @@ int main(int argc, char* argv[])
 {
     try
     {
-        if (argc != 2)
+        if (argc != 3)
         {
             std::cerr << "Usage: " << argv[0] << " <port>" << std::endl;
             return 1; 
@@ -104,6 +104,7 @@ int main(int argc, char* argv[])
         lua.open_libraries();
 
         lua["filename"] = argv[1];
+        lua["messageName"] = argv[2];
         lua.script_file("Transfor.lua");
 
         //asio::io_context io_context;

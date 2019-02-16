@@ -5,9 +5,6 @@ package.cpath = ';/root/dbserver/lib/?.so'
 local pb = require "pb"
 local protoc = require "protoc"
 
-local data = {}
-local type_table = {}
-local tmp = {}
 
 protoc.paths[#protoc.paths + 1] = "/root/dbserver/proto"
 protoc.include_imports = true
@@ -28,7 +25,12 @@ local TestData = {
     }
 }
 
-local message_name = string.sub(filename, 1, -7)
+
+local data = {}
+local type_table = {}
+local tmp = {}
+
+
 local g_type_name
 
 for name in pb.types() do
@@ -69,12 +71,9 @@ print(pb.tohex(bytes))
 
 -- and decode the binary data back into lua table
 local data2 = assert(pb.decode("MAIN.AddressBook", bytes))
-print(require "serpent".block(data2))
+print(require "serpent".block(pb.types()))
 --print(require "serpent".block(type_table))
 
-for name in pb.types() do
-  print(name)
-end
 
 
 
