@@ -11,47 +11,44 @@ protoc.include_imports = true
 protoc:loadfile(filename)
 pb.option("enum_as_value")
 
-local TestData = {
-    person =  {
-        {
-            name = "ilse",
-            id  = 18,
-            email = "123.com",
-            phone = {
-                { number = "87654321", type = "WORK" },
-                { number = "87654321", type = "WORK" }
-            }
-        }
-    }
+local randomData = {
+    bool     = true,
+    double   = 55.55,
+    float    = 123.123,
+    int32    = -64,
+    uint32   = 64,
+    int64    = -1245,
+    uint64   = 1245,
+    sint32   = -88,
+    sint64   = -12456,
+    fixed32  = 666,
+    fixed64  = 6666,
+    sfixed32 = 45,
+    sfixed64 = 54,
+    string   = "ChengMiao",
+    bytes    = "X",
 }
 
 
 local data = {}
 local type_table = {}
-local tmp = {}
-
-
-local g_type_name
 
 for name in pb.types() do
-    --table.insert(type_table, name, name)
     type_table[name] = name
 end 
 
 function MakeMessageTable(field_type, main_table) 
-    for field_name, _, type in pb.fields(field_type) do
+    for name, number, type, value, option in pb.fields(field_type) do
         if type_table[type] == nil then
-            if type == "int32" then
-                --table.insert(main_table, field_name, 1024)
-                main_table[field_name] = 1024
-            elseif type == "string" then
-                --table.insert(main_table, field_name, "ChengMiao")
-                main_table[field_name] = "ChengMiao"
+            main_table[name] = randomData[type]
+        else 
+            local _, _, subType = pb.type(type)
+            if subType == "enum" then
+                main_table[name] = pb.enum(type, 1)
+            else if subType == "message" then
+                main_table[field_name] = {}
+                main_table[field_name][1] = MakeMessageTable(type, {})
             end
-        else
-            --table.insert(main_table, field_name, tmp)
-            main_table[field_name] = {}
-            main_table[field_name][1] = MakeMessageTable(type, tmp)
         end
     end
 
@@ -59,24 +56,19 @@ function MakeMessageTable(field_type, main_table)
 end 
 
 for name, type_name in pb.types() do
-    if type_name == message_name then
-        g_type_name = name
-        --MakeMessageTable(name, data)
+    if type_name == messageName then
+        MakeMessageTable(name, data)
     end
 end
 
 -- encode lua table data into binary format in lua string and return
-local bytes = assert(pb.encode("MAIN.AddressBook", TestData))
+local bytes = assert(pb.encode(messageName, data))
 print(pb.tohex(bytes))
 
 -- and decode the binary data back into lua table
-local data2 = assert(pb.decode("MAIN.AddressBook", bytes))
-print(require "serpent".block(pb.types()))
---print(require "serpent".block(type_table))
+local data2 = assert(pb.decode(messageName, bytes))
+print(require "serpent".block(data2)
 
-for name, number, type, value, option in pb.fields("SUB.Person") do
-  print(name, number, type, value, option)
-end
 
 
 
