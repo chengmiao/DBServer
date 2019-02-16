@@ -17,9 +17,12 @@ local TestData = {
     person =  {
         {
             name = "ilse",
-            age  = 18,
+            id  = 18,
             email = "123.com",
-            phone = "123456"
+            phone = {
+                { number = "87654321", type = "WORK" },
+                { number = "87654321", type = "WORK" }
+            }
         }
     }
 }
