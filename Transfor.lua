@@ -69,11 +69,11 @@ for name, type_name in pb.types() do
 end
 
 -- encode lua table data into binary format in lua string and return
-local bytes = assert(pb.encode("AddressBook", TestData))
+local bytes = assert(pb.encode("MAIN.AddressBook", TestData))
 print(pb.tohex(bytes))
 
 -- and decode the binary data back into lua table
-local data2 = assert(pb.decode("AddressBook", bytes))
+local data2 = assert(pb.decode("MAIN.AddressBook", bytes))
 print(require "serpent".block(data2))
 --print(require "serpent".block(type_table))
 
