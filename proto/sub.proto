@@ -5,13 +5,6 @@ message Person
 {
     string name = 1;
     int32 id = 2;       
-             string email = 3;
-  
-    message PhoneNumber 
-    {
-        string number = 1;
-        string name = 2;
-    }
-  
-    repeated PhoneNumber phone = 4;
+    string email = 3;
+    string phone = 4;
 }

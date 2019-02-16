@@ -18,10 +18,7 @@ local TestData = {
             name = "ilse",
             age  = 18,
             email = "123.com",
-            phone = {
-                { number = "12312341234", name = "123" },
-                { number = "45645674567", name = "123" }
-            }
+            phone = "123456"
         }
     }
 }
