@@ -74,6 +74,10 @@ local data2 = assert(pb.decode("MAIN.AddressBook", bytes))
 print(require "serpent".block(pb.types()))
 --print(require "serpent".block(type_table))
 
+for name, number, type, value, option in pb.fields("SUB.Person") do
+  print(name, number, type, value, option)
+end
+
 
 
 
