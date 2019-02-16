@@ -17,6 +17,7 @@ local TestData = {
         {
             name = "Alice",
             id = 12345,
+            email = "qq.com",
             phone = {
                 { number = "1301234567" },
                 { number = "87654321", type = "WORK" },
