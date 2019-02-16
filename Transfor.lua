@@ -32,6 +32,7 @@ local randomData = {
 
 local data = {}
 local type_table = {}
+local tmp = {}
 
 for name in pb.types() do
     type_table[name] = name
@@ -47,7 +48,7 @@ function MakeMessageTable(field_type, main_table)
                 main_table[name] = pb.enum(type, 1)
             elseif subType == "message" then
                 main_table[field_name] = {}
-                main_table[field_name][1] = MakeMessageTable(type, {})
+                main_table[field_name][1] = MakeMessageTable(type, tmp)
             end
         end
     end
