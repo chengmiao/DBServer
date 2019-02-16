@@ -10,11 +10,8 @@ local type_table = {}
 local tmp = {}
 
 protoc.paths[#protoc.paths + 1] = "/root/dbserver/proto"
---protoc.unknown_module = function(self, module_name) return protoc:loadfile(module_name) end
 protoc.include_imports = true
-  
 protoc:loadfile(filename)
---protoc:loadfile("sub.proto")
 
 local TestData = {
     person =  {
