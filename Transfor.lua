@@ -14,9 +14,13 @@ protoc:loadfile(filename)
 
 local TestData = {
     person =  {
-        name = "Alice",
-        id = 12345,
-        email = "qq.com",
+        {
+            name = "ilse",
+            age  = 18,
+            phone = {
+                { number = "12312341234" },
+                { number = "45645674567" }
+        }
     }
 }
 
