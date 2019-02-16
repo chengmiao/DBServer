@@ -47,8 +47,8 @@ function MakeMessageTable(field_type, main_table)
             if subType == "enum" then
                 main_table[name] = pb.enum(type, 1)
             elseif subType == "message" then
-                main_table[field_name] = {}
-                main_table[field_name][1] = MakeMessageTable(type, tmp)
+                main_table[name] = {}
+                main_table[name][1] = MakeMessageTable(type, tmp)
             end
         end
     end
