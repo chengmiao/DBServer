@@ -12,6 +12,7 @@ local tmp = {}
 protoc.paths[#protoc.paths + 1] = "/root/dbserver/proto"
 protoc.include_imports = true
 protoc:loadfile(filename)
+pb.option("enum_as_value")
 
 local TestData = {
     person =  {
