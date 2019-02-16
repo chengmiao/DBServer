@@ -13,12 +13,10 @@ protoc.paths[#protoc.paths + 1] = "/root/dbserver/proto"
 protoc:loadfile(filename)
 
 local TestData = {
-    person = {
-        {
-            name = "Alice",
-            id = 12345,
-            email = "qq.com",
-        }
+    person =  {
+        name = "Alice",
+        id = 12345,
+        email = "qq.com",
     }
 }
 
