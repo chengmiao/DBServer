@@ -68,8 +68,3 @@ print(pb.tohex(bytes))
 -- and decode the binary data back into lua table
 local data2 = assert(pb.decode(messageName, bytes))
 print(require "serpent".block(data2))
-
-
-
-
-
