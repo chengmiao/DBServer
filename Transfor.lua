@@ -10,7 +10,7 @@ local type_table = {}
 local tmp = {}
 
 protoc.paths[#protoc.paths + 1] = "/root/dbserver/proto"
-protoc.unknown_module = function(self, module_name) protoc:loadfile(module_name) end
+protoc.unknown_module = function(self, module_name) return protoc:loadfile(module_name) end
 
 protoc:loadfile(filename)
 --protoc:loadfile("sub.proto")
