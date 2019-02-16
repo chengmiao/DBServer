@@ -28,8 +28,6 @@ function MakeMessageTable(field_type, main_table)
         if type_table[type] == nil then
             if type == "int32" then
                 --table.insert(main_table, field_name, 1024)
-                print(field_type)
-                print(field_name)
                 main_table[field_name] = 1024
             elseif type == "string" then
                 --table.insert(main_table, field_name, "ChengMiao")
@@ -54,10 +52,11 @@ end
 
 -- encode lua table data into binary format in lua string and return
 local bytes = assert(pb.encode(g_type_name, data))
-print(pb.tohex(bytes))
+--print(pb.tohex(bytes))
 
 -- and decode the binary data back into lua table
 local data2 = assert(pb.decode(g_type_name, bytes))
-print(require "serpent".block(data2))
+--print(require "serpent".block(data2))
+print(require "serpent".block(type_table))
 
 
