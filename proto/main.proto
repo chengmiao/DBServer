@@ -4,5 +4,5 @@ package MAIN;
 
 message AddressBook 
 {
-    repeated Person person = 1;
+    repeated SUB.Person person = 1;
 }
