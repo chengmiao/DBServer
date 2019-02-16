@@ -3,14 +3,14 @@ package SUB;
 
 message Person 
 {
-    required string name = 1;
-    required int32 id = 2;       
+    string name = 1;
+    int32 id = 2;       
              string email = 3;
   
     message PhoneNumber 
     {
-      required string number = 1;
-               string name = 2;
+        string number = 1;
+        string name = 2;
     }
   
     repeated PhoneNumber phone = 4;
