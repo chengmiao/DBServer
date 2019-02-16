@@ -41,6 +41,8 @@ end
 function MakeMessageTable(field_type, main_table) 
     for name, number, type, value, option in pb.fields(field_type) do
         if type_table[type] == nil then
+            print(type)
+            print(randomData[type])
             main_table[name] = randomData[type]
         else 
             local _, _, subType = pb.type(type)
