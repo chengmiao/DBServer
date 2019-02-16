@@ -11,6 +11,7 @@ local tmp = {}
 
 protoc.paths[#protoc.paths + 1] = "/root/dbserver/proto"
 protoc:loadfile(filename)
+protoc.include_imports = true
 
 local TestData = {
     person =  {
