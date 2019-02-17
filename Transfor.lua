@@ -29,14 +29,8 @@ local randomData = {
     bytes    = "X",
 }
 
-
 local data = {}
 local type_table = {}
-local tmp = {}
-
-for name in pb.types() do
-    type_table[name] = name
-end 
 
 function MakeMessageTable(field_type, main_table) 
     for name, number, type, value, option in pb.fields(field_type) do
@@ -50,7 +44,7 @@ function MakeMessageTable(field_type, main_table)
                 main_table[name] = pb.enum(type, 1)
             elseif subType == "message" then
                 main_table[name] = {}
-                main_table[name][1] = MakeMessageTable(type, tmp)
+                main_table[name][1] = MakeMessageTable(type, {})
             end
         end
     end
@@ -58,11 +52,15 @@ function MakeMessageTable(field_type, main_table)
     return main_table
 end 
 
-for name, type_name in pb.types() do
-    if type_name == messageName then
-        MakeMessageTable(name, data)
+local dataType
+for name in pb.types() do
+    type_table[name] = name
+    if name == "."..messageName then
+        dataType = name
     end
 end
+
+MakeMessageTable(dataType, data)
 
 -- encode lua table data into binary format in lua string and return
 local bytes = assert(pb.encode(messageName, data))
