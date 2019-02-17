@@ -22,24 +22,25 @@ int main(int argc, char* argv[])
         tcp::resolver resolver(io_context);
         asio::connect(s, resolver.resolve(argv[1], argv[2]));
 
-        //std::cout << "Enter message";
+        std::cout << "Enter message";
         char request[max_length];
-        //std::cin.getline(request, max_length);
-        //std::size_t request_length = std::strlen(request);
+        std::cin.getline(request, max_length);
+        std::size_t request_length = std::strlen(request);
 
-        test::Person msg;
-        msg.set_name("ChengMiao");
-        msg.set_age(30);
-        msg.set_address("ShangHai");
-        test::Phone* msg1 = msg.add_contacts();
-        msg1->set_name("Linda");
-        msg1->set_phonenumber(18550101361);
+        //test::Person msg;
+        //msg.set_name("ChengMiao");
+        //msg.set_age(30);
+        //msg.set_address("ShangHai");
+        //test::Phone* msg1 = msg.add_contacts();
+        //msg1->set_name("Linda");
+        //msg1->set_phonenumber(18550101361);
 
-        msg.SerializeToArray(request, msg.ByteSize());
-        asio::write(s, asio::buffer(request, msg.ByteSize()));
+        //msg.SerializeToArray(request, msg.ByteSize());
+        //asio::write(s, asio::buffer(request, msg.ByteSize()));
+        asio::write(s, asio::buffer(request, request_length));
 
         char reply[max_length];
-        std::size_t reply_length = asio::read(s, asio::buffer(reply, msg.ByteSize()));
+        std::size_t reply_length = asio::read(s, asio::buffer(reply, request_length));
         std::cout << "Reply is";
         std::cout.write(reply, reply_length);
         std::cout << "\n";

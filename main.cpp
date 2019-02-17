@@ -107,11 +107,11 @@ int main(int argc, char* argv[])
         lua["messageName"] = argv[2];
         lua.script_file("Transfor.lua");
 
-        //asio::io_context io_context;
+        asio::io_context io_context;
 
-        //Server s(io_context, std::atoi(argv[1]));
+        Server s(io_context, std::atoi(argv[1]));
 
-        //io_context.run();
+        io_context.run();
     }
     catch (std::exception& e)
     {
