@@ -21,9 +21,9 @@ assert(protoc:load [[
 
 local data = testdata
 -- encode lua table data into binary format in lua string and return
-local bytes = assert(pb.encode("Person", data))
-print(pb.tohex(testdata))
+--local bytes = assert(pb.encode("Person", data))
+print(pb.tohex(data))
 
 -- and decode the binary data back into lua table
-local data2 = assert(pb.decode("Person", bytes))
+local data2 = assert(pb.decode("Person", data))
 print(require "serpent".block(data2))
