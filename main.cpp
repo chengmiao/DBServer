@@ -39,17 +39,17 @@ private:
             {
                 std::cout << "=== running lua code ===" << std::endl;
     
-                sol::state lua;
-                lua.open_libraries();
+                //sol::state lua;
+                //lua.open_libraries();
 
-                int value = lua.script("return 54");
-                if (value == 54)
-                {
-                    std::cout << "Hello World" << std::endl;
+                //int value = lua.script("return 54");
+                //if (value == 54)
+                //{
+                    //std::cout << "Hello World" << std::endl;
 
-                    lua["testdata"] = data_;
-                    lua.script_file("PBtest.lua");
-                }
+                    //lua["testdata"] = data_;
+                    //lua.script_file("PBtest.lua");
+                //}
 
                 do_read();
             }
