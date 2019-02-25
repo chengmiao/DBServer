@@ -65,7 +65,7 @@ char data_[max_length];
 class Server
 {
 public:
-    Server(asio::io_context& io_context, short port) : acceptor_(io_context, tcp::endpoint(ip::address::from_string("101.132.123.54"), port))
+    Server(asio::io_context& io_context, short port) : acceptor_(io_context, tcp::endpoint(asio::ip::address::from_string("101.132.123.54"), port))
     {
         do_accept();
     }
